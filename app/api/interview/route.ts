@@ -56,3 +56,9 @@ export async function POST(request: NextRequest) {
   );
 }
 }
+export function GET() {
+  return new NextResponse(
+    JSON.stringify({ success: true, data: "Thank you!" }),
+    { status: 200 }
+  );
+}
