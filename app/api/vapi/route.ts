@@ -37,6 +37,7 @@ export async function POST(request: Request) {
     };
 
     console.log("interview", interview);
+    console.log(`${process.env.DOMAIN_NAME}/api/interview`);
     await axios.post(`${process.env.DOMAIN_NAME}/api/interview`,interview);
 
     return Response.json({ success: true }, { status: 200 });
