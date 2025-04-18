@@ -9,9 +9,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
 import FormField from "./FormField";
-import {useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import axios from "axios";
-
 
 const authFormSchema = (type: FormType) => {
   return z.object({
@@ -22,7 +21,6 @@ const authFormSchema = (type: FormType) => {
   });
 };
 const AuthForm = ({ type }: { type: FormType }) => {
-
   const formSchema = authFormSchema(type);
   const router = useRouter();
 
@@ -39,11 +37,15 @@ const AuthForm = ({ type }: { type: FormType }) => {
     try {
       if (type === "sign-up") {
         const { name, email, password } = values;
-        if(!name) {
+        if (!name) {
           toast.error("Name is required");
           return;
         }
-        const result = await axios.post("/api/users/signup", {name,email,password});
+        const result = await axios.post("/api/users/signup", {
+          name,
+          email,
+          password,
+        });
         if (!result.data.success) {
           toast.error(result.data.message);
           return;
@@ -52,7 +54,10 @@ const AuthForm = ({ type }: { type: FormType }) => {
         router.push("/");
       } else {
         const { email, password } = values;
-        const result = await axios.post("/api/users/signin",{email, password});
+        const result = await axios.post("/api/users/signin", {
+          email,
+          password,
+        });
         if (!result.data.success) {
           toast.error(result.data.message);
           return;
@@ -103,8 +108,18 @@ const AuthForm = ({ type }: { type: FormType }) => {
               placeholder="Your password"
               type="password"
             />
-            <Button type="submit" className="btn">
-              {isSignIn ? "Sign in" : "Create an account"}
+            <Button
+              type="submit"
+              className="btn"
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting
+                ? isSignIn
+                  ? "Signing in..."
+                  : "Creating..."
+                : isSignIn
+                ? "Sign in"
+                : "Create an account"}
             </Button>
           </form>
         </Form>
