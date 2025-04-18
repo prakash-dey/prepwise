@@ -6,9 +6,10 @@ export interface IInterview extends Document {
   questions: string[];
   techstack: string[];
   createdAt: string;
-  userId: mongoose.Types.ObjectId; // Reference to User
+  userId: mongoose.Types.ObjectId;
   type: string;
   finalized: boolean;
+  pending?: boolean;
 }
 
 const InterviewSchema: Schema<IInterview> = new Schema(
@@ -50,6 +51,10 @@ const InterviewSchema: Schema<IInterview> = new Schema(
     },
 
     finalized: {
+      type: Boolean,
+      default: false,
+    },
+    pending: {
       type: Boolean,
       default: false,
     },

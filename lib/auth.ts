@@ -2,11 +2,13 @@ import { NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
 import User from "@/models/User.model";
 import connectDB from "@/Database/config";
-connectDB();
-
-export const isUserAuthenticated = async (request: NextRequest) => {
+import { cookies } from "next/headers";
+await connectDB();
+ 
+export const isUserAuthenticated = async () => {
     try {
-        const token = request.cookies.get("token")?.value || '';
+        const _cookies = await cookies();
+        const token = _cookies.get("token")?.value || '';
         console.log("User Token:", token);
         if (!token) {
             return null;

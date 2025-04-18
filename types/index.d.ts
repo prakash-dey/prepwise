@@ -39,12 +39,16 @@ interface User {
 }
 
 interface InterviewCardProps {
+  _id?: string;
   interviewId?: string;
   userId?: string;
   role: string;
   type: string;
   techstack: string[];
   createdAt?: string;
+  pending?: boolean;
+  level?: string;
+  feedbackId?: string;
 }
 
 interface AgentProps {

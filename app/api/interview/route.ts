@@ -27,6 +27,7 @@ export async function POST(request: NextRequest) {
     finalized,
     coverImage,
     createdAt,
+    pending: true,
   });
   if (!interview) {
     return new NextResponse(

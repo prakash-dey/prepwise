@@ -8,6 +8,7 @@ export interface IUser extends Document {
   password: string;
   comparePassword(candidatePassword: string): Promise<boolean>;
   generateAuthToken(): string;
+  profileURL?: string;
 }
 
 const UserSchema: Schema<IUser> = new Schema(
@@ -31,6 +32,10 @@ const UserSchema: Schema<IUser> = new Schema(
       type: String,
       required: true,
       minlength: 6,
+    },
+    profileURL: {
+      type: String,
+      default: 'https://www.gravatar.com/avatar/?d=mp',
     },
   },
   {
