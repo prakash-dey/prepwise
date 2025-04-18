@@ -4,13 +4,14 @@ import User from "@/models/User.model";
 import connectDB from "@/Database/config";
 import { cookies } from "next/headers";
 import Interview from "@/models/Interview.model";
+import InterviewFeedback from "@/models/Feedback.model";
 await connectDB();
  
 export const isUserAuthenticated = async () => {
     try {
         const _cookies = await cookies();
         const token = _cookies.get("token")?.value || '';
-        console.log("User Token:", token);
+        // console.log("User Token:", token);
         if (!token) {
             return null;
         }
@@ -44,8 +45,8 @@ export const getInterviewById = async (id: string) => {
 export const getFeedbackByInterviewId = async (params:{interviewId: string, userId:string}) => {
     try {
         const { interviewId, userId } = params;
-        const feedback = await Interview.findOne({
-            _id: interviewId,
+        const feedback = await InterviewFeedback.findOne({
+            interviewId: interviewId,
             userId: userId,
         });
         if (!feedback) {

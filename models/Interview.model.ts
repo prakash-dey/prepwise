@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, Model } from 'mongoose';
+import mongoose, { Document, Schema, Model } from "mongoose";
 
 export interface IInterview extends Document {
   role: string;
@@ -41,7 +41,7 @@ const InterviewSchema: Schema<IInterview> = new Schema(
 
     userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User', // Reference to User model
+      ref: "User", // Reference to User model
       required: true,
     },
 
@@ -66,6 +66,7 @@ const InterviewSchema: Schema<IInterview> = new Schema(
 
 // Avoid redefining the model during hot reload
 const Interview: Model<IInterview> =
-  mongoose.models.Interview || mongoose.model<IInterview>('Interview', InterviewSchema);
+  mongoose.models.Interview ||
+  mongoose.model<IInterview>("Interview", InterviewSchema);
 
 export default Interview;

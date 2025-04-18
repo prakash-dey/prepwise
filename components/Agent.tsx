@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi";
@@ -97,7 +97,7 @@ const Agent = ({
         feedbackId,
       });
       const { success, feedbackId: id } = response.data;
-
+      console.log("Feedback response:", response.data);
       if (success && id) {
         router.push(`/interview/${interviewId}/feedback`);
       } else {
@@ -144,6 +144,7 @@ const Agent = ({
   const handleDisconnect = () => {
     setCallStatus(CallStatus.FINISHED);
     vapi.stop();
+    // redirect("/");
   };
 
   return (
