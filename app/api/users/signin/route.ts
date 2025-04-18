@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     );
     response.cookies.set("token", token, {
       httpOnly: true,
-      maxAge: 60 * 60, // 1 hour    
+      maxAge: 60 * 60* 24,   
     });
     return response;
   } catch (error: any) {
