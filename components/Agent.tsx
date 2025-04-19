@@ -197,7 +197,7 @@ const Agent = ({
       )}
 
       <div className="w-full flex justify-center gap-5">
-        {(callStatus === "INACTIVE") &&
+        {(callStatus === "INACTIVE" || callStatus === "FINISHED") &&
         <button className="btn-disconnect cursor-pointer" onClick={() => router.back()}>
           Back
         </button>
