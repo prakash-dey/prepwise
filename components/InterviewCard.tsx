@@ -96,7 +96,7 @@ const InterviewCard = async ({
               href={
                 feedback
                   ? `/interview/${interviewId}/feedback`
-                  : `/interview/${interviewId}`
+                  : `/interview-room/${interviewId}`
               }
             >
               {feedback ? "Check Feedback" : "View Interview"}

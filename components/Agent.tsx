@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { redirect, useRouter } from "next/navigation";
+import {useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi";
@@ -196,7 +196,12 @@ const Agent = ({
         </div>
       )}
 
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center gap-5">
+        {(callStatus === "INACTIVE") &&
+        <button className="btn-disconnect cursor-pointer" onClick={() => router.back()}>
+          Back
+        </button>
+        }
         {callStatus !== "ACTIVE" ? (
           <button className="relative btn-call" onClick={() => handleCall()}>
             <span

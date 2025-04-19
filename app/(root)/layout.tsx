@@ -45,8 +45,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
             <Image
               src={"/user-avatar.png"}
               alt="profile"
-              width={50}
-              height={50}
+              width={38}
+              height={38}
               className="rounded-full"
             />
           </button>

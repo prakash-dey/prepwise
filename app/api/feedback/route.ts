@@ -50,9 +50,19 @@ console.log("Formatted transcript:", formattedTranscript);
       createdAt: new Date().toISOString(),
     };
 
-    const fb = await FeedbackModel.create(feedback);
-    await Interview.findByIdAndUpdate(interviewId, {pending: false});
-    return NextResponse.json({ success: true, feedbackId: fb._id as string },{status: 200});
+    const existingFb = await FeedbackModel.findById(feedbackId);
+    let fb = null;
+    if (existingFb) {
+      fb = await FeedbackModel.findByIdAndUpdate(
+        feedbackId,feedback);
+    }else{
+       fb = await FeedbackModel.create(feedback);
+      await Interview.findByIdAndUpdate(interviewId, {pending: false});
+    }
+    if (!fb) {
+      return NextResponse.json({ success: false, message: "Failed to create the feetback" }, { status: 500 });
+    }
+    return NextResponse.json({ success: true, feedbackId: fb._id as string }, { status: 200 });
   } catch (error) {
     console.error("Error saving feedback:", error);
     return NextResponse.json({ success: false, message:"Something went wrong" },{status: 500});

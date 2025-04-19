@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import InterviewCard from "@/components/InterviewCard";
 import axios from "axios";
 import { isUserAuthenticated } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 
 async function getAllInterviewsByUserId(userId: string) {
@@ -26,9 +27,7 @@ async function Home() {
 
   const user  = await isUserAuthenticated();
     if (!user) {
-      return (
-        <h3>User is not authenticated</h3>
-      )
+      redirect("signin");
     }
     const userId = user?._id as string;
 
@@ -51,7 +50,7 @@ async function Home() {
           </p>
 
           <Button asChild className="btn-primary max-sm:w-full">
-            <Link href="/interview">Start an Interview</Link>
+            <Link href="/interview-room">Start an Interview</Link>
           </Button>
         </div>
 
